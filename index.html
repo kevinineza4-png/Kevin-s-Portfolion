@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dev Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
@@ -16,7 +15,22 @@
     --text: #1a1f2c;
     --muted: #5a6678;
     --border: rgba(0, 0, 0, 0.08);
+    --nav-link: #243042;
     --glow: 0 0 40px rgba(0,196,168,0.12);
+  }
+
+  body[data-theme="dark"] {
+    --bg: #07111f;
+    --surface: #0d1727;
+    --surface2: #142033;
+    --accent: #35e3c4;
+    --accent2: #8d8cff;
+    --accent3: #ff8f8f;
+    --text: #edf4ff;
+    --muted: #b7c2d6;
+    --border: rgba(255, 255, 255, 0.12);
+    --nav-link: #edf4ff;
+    --glow: 0 0 40px rgba(53,227,196,0.18);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,9 +45,9 @@
 }
 
   body {
-    background: #ffffff;
+    background: var(--bg);
     color: var(--text);
-    font-family: 'DM Mono', monospace;
+    font-family: 'Segoe UI', Arial, sans-serif;
     overflow-x: hidden;
   }
 
@@ -51,21 +65,26 @@
     padding: 24px 48px;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(8,11,16,0.95), transparent);
-    backdrop-filter: blur(8px);
+    background: linear-gradient(to bottom, rgba(8,11,16,0.92), rgba(8,11,16,0.35));
+    backdrop-filter: blur(10px);
+  }
+  body[data-theme="light"] nav {
+    background: linear-gradient(to bottom, rgba(255,255,255,0.92), rgba(255,255,255,0.45));
   }
   .nav-logo {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 1.2rem; font-weight: 800;
     color: var(--accent);
     letter-spacing: -0.02em;
     text-decoration: none;
   }
   .nav-logo span { color: var(--text); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
   .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--nav-link); text-decoration: none;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em;
+    text-transform: none;
     transition: color 0.3s;
     position: relative;
   }
@@ -76,10 +95,34 @@
   }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .theme-toggle,
+  .lang-switch select {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.8);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  body[data-theme="dark"] .theme-toggle,
+  body[data-theme="dark"] .lang-switch select {
+    background: rgba(10, 18, 30, 0.9);
+  }
+  .theme-toggle:hover,
+  .lang-switch select:hover {
+    border-color: rgba(0,229,192,0.35);
+    color: var(--accent);
+  }
+  .lang-switch { display: flex; align-items: center; gap: 8px; color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.9rem; }
+  .lang-switch span { color: var(--muted); }
   .nav-cta {
     border: 1px solid var(--accent); color: var(--accent);
-    padding: 8px 20px; border-radius: 2px;
-    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 18px; border-radius: 999px;
+    font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em;
     text-decoration: none; transition: all 0.3s;
   }
   .nav-cta:hover { background: var(--accent); color: var(--bg); }
@@ -131,7 +174,7 @@
   }
 
   .hero-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: clamp(3rem, 6vw, 5.5rem);
     font-weight: 800;
     line-height: 1.0;
@@ -156,7 +199,7 @@
   .btn-primary {
     background: var(--accent); color: var(--bg);
     padding: 14px 32px; border-radius: 2px;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
     text-decoration: none; font-weight: 400;
     transition: all 0.3s;
@@ -222,7 +265,7 @@
     padding: 12px 16px; border-radius: 4px;
     font-size: 0.72rem; color: var(--muted);
   }
-  .photo-tag strong { display: block; color: var(--accent); font-family: 'Syne', sans-serif; font-size: 1rem; }
+  .photo-tag strong { display: block; color: var(--accent); font-family: 'Segoe UI', Arial, sans-serif; font-size: 1rem; }
 
   .hero-stats {
     position: absolute; top: 40px; left: -30px;
@@ -232,7 +275,7 @@
     font-size: 0.72rem; color: var(--muted);
     box-shadow: var(--glow);
   }
-  .hero-stats strong { display: block; color: var(--text); font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; }
+  .hero-stats strong { display: block; color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; font-size: 1.3rem; font-weight: 700; }
 
   /* SECTIONS */
   section { padding: 100px 48px; position: relative; z-index: 1; }
@@ -245,7 +288,7 @@
   .section-label::before { content: '//'; color: var(--muted); }
 
   .section-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800; letter-spacing: -0.03em;
     margin-bottom: 16px;
@@ -254,7 +297,7 @@
   .section-subtitle { color: var(--muted); font-size: 0.9rem; line-height: 1.8; max-width: 560px; }
 
   /* SKILLS */
-  .skills-section { background: #f8f9fa; }
+  .skills-section { background: var(--surface); }
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -281,7 +324,7 @@
     background: var(--bg);
   }
   .skill-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 1.1rem; font-weight: 700;
     margin-bottom: 8px;
   }
@@ -316,7 +359,6 @@
     overflow: hidden;
     transition: all 0.4s;
     position: relative;
-    group: '';
   }
   .project-card:hover {
     border-color: rgba(0,229,192,0.4);
@@ -333,7 +375,7 @@
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
     font-size: 5rem; opacity: 0.07;
-    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-family: 'Segoe UI', Arial, sans-serif; font-weight: 800;
     letter-spacing: -0.05em;
     user-select: none;
   }
@@ -375,7 +417,7 @@
   .tag.purple { color: #a094ff; border-color: rgba(108,99,255,0.3); background: rgba(108,99,255,0.05); }
   .tag.red { color: #ff8585; border-color: rgba(255,107,107,0.3); background: rgba(255,107,107,0.05); }
   .project-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: 1.2rem; font-weight: 700;
     margin-bottom: 8px;
   }
@@ -391,7 +433,7 @@
   .project-link.primary { color: var(--accent); }
 
   /* WEBSITES */
-  .websites-section { background: #f8f9fa; }
+  .websites-section { background: var(--surface); }
   .websites-list { margin-top: 60px; display: flex; flex-direction: column; gap: 1px; }
   .website-item {
     background: var(--surface);
@@ -409,14 +451,14 @@
     transform: translateX(8px);
   }
   .website-num {
-    font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800;
+    font-family: 'Segoe UI', Arial, sans-serif; font-size: 1.8rem; font-weight: 800;
     color: var(--border); min-width: 48px;
     letter-spacing: -0.05em;
   }
   .website-item:hover .website-num { color: var(--accent); }
   .website-info { flex: 1; }
   .website-name {
-    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    font-family: 'Segoe UI', Arial, sans-serif; font-size: 1.1rem; font-weight: 700;
     margin-bottom: 4px;
   }
   .website-url { color: var(--accent); font-size: 0.78rem; }
@@ -432,7 +474,7 @@
     max-width: 700px; margin: 0 auto; text-align: center;
   }
   .contact-email {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 800; color: var(--accent);
     text-decoration: none; letter-spacing: -0.03em;
@@ -490,8 +532,9 @@
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 20px 24px; gap: 12px; flex-wrap: wrap; }
     .nav-links { display: none; }
+    .nav-actions { margin-left: auto; }
     .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; gap: 60px; }
     .hero-subtitle { margin-left: auto; margin-right: auto; }
     .hero-actions { justify-content: center; }
@@ -509,15 +552,26 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-  <img src="logo.png" alt="Ineza Kevin" height="80px" width="50px">
-</a>
+    <img src="logo.png" alt="Ineza Kevin" height="80px" width="50px">
+  </a>
   <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#websites">Websites</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+    <li><a href="#projects" data-i18n="navProjects">Projects</a></li>
+    <li><a href="#websites" data-i18n="navWebsites">Websites</a></li>
+    <li><a href="#contact" data-i18n="navContact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Hire Me</a>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
+    <label class="lang-switch">
+      <span data-i18n="langLabel">Language</span>
+      <select id="langSelect" aria-label="Select language">
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="rw">RW</option>
+      </select>
+    </label>
+  </div>
+  <a href="#contact" class="nav-cta" data-i18n="hireMe">Hire Me</a>
 </nav>
 
 <!-- HERO -->
@@ -527,19 +581,19 @@
   <div class="hero-orb orb2"></div>
 
   <div class="hero-content">
-    <div class="hero-badge">Available for Work</div>
+    <div class="hero-badge" data-i18n="heroBadge">Available for Work</div>
     <h1 class="hero-title">
       Ineza Kevin<br>
       <span class="line2">Full-Stack</span><br>
       <span class="line3">Developer.</span>
     </h1>
-    <p class="hero-subtitle">
+    <p class="hero-subtitle" data-i18n="heroSubtitle">
       I build fast, beautiful, and scalable web applications — from pixel-perfect frontends to robust backend systems. Turning ideas into real digital products.
     </p>
     <div class="hero-actions">
-      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#projects" class="btn-primary" data-i18n="heroViewWork">View My Work</a>
       <a href="#contact" class="btn-secondary">
-        Let's Talk
+        <span data-i18n="heroTalk">Let's Talk</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
@@ -555,11 +609,11 @@
       </div>
       <div class="photo-tag">
         <strong>1+</strong>
-        Years Experience
+        <span data-i18n="yearsExp">Years Experience</span>
       </div>
       <div class="hero-stats">
         <strong>5+</strong>
-        Projects Delivered
+        <span data-i18n="projectsDelivered">Projects Delivered</span>
       </div>
     </div>
   </div>
@@ -567,61 +621,61 @@
 
 <!-- SKILLS -->
 <section class="skills-section" id="skills">
-  <div class="section-label">Expertise</div>
-  <h2 class="section-title reveal">What I Work With</h2>
-  <p class="section-subtitle reveal">A versatile stack built for modern web development — from idea to deployment.</p>
+  <div class="section-label" data-i18n="skillsLabel">Expertise</div>
+  <h2 class="section-title reveal" data-i18n="skillsTitle">What I Work With</h2>
+  <p class="section-subtitle reveal" data-i18n="skillsSubtitle">A versatile stack built for modern web development — from idea to deployment.</p>
 
   <div class="skills-grid reveal">
     <div class="skill-card">
       <div class="skill-icon">⚛️</div>
-      <div class="skill-name">Vue.js</div>
-      <div class="skill-desc">Building dynamic UIs and server-rendered apps with modern React patterns, hooks, and the App Router.</div>
+      <div class="skill-name" data-i18n="skillVue">Vue.js</div>
+      <div class="skill-desc" data-i18n="skillVueDesc">Building dynamic UIs and server-rendered apps with modern React patterns, hooks, and the App Router.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:92%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>92%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>92%</span></div>
     </div>
     <div class="skill-card">
       <div class="skill-icon">🟨</div>
-      <div class="skill-name">JavaScript / TypeScript</div>
-      <div class="skill-desc">Deep expertise in modern JS/TS — async patterns, type systems, performance, and clean architecture.</div>
+      <div class="skill-name" data-i18n="skillJs">JavaScript / TypeScript</div>
+      <div class="skill-desc" data-i18n="skillJsDesc">Deep expertise in modern JS/TS — async patterns, type systems, performance, and clean architecture.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:95%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>95%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>95%</span></div>
     </div>
     <div class="skill-card">
       <div class="skill-icon">🐍</div>
-      <div class="skill-name">Python</div>
-      <div class="skill-desc">Backend APIs, data processing, and automation using Python with Django and FastAPI frameworks.</div>
+      <div class="skill-name" data-i18n="skillPy">Python</div>
+      <div class="skill-desc" data-i18n="skillPyDesc">Backend APIs, data processing, and automation using Python with Django and FastAPI frameworks.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:85%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>85%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>85%</span></div>
     </div>
     <div class="skill-card">
       <div class="skill-icon">🗄️</div>
-      <div class="skill-name">Database Design</div>
-      <div class="skill-desc">PostgreSQL, MySQL, MongoDB — schema design, query optimization, and scalable data modeling.</div>
+      <div class="skill-name" data-i18n="skillDb">Database Design</div>
+      <div class="skill-desc" data-i18n="skillDbDesc">PostgreSQL, MySQL, MongoDB — schema design, query optimization, and scalable data modeling.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:88%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>88%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>88%</span></div>
     </div>
     <div class="skill-card">
       <div class="skill-icon">☁️</div>
-      <div class="skill-name">Cloud & DevOps</div>
-      <div class="skill-desc">AWS, Vercel, Docker — CI/CD pipelines, containerization, and production deployments.</div>
+      <div class="skill-name" data-i18n="skillCloud">Cloud & DevOps</div>
+      <div class="skill-desc" data-i18n="skillCloudDesc">AWS, Vercel, Docker — CI/CD pipelines, containerization, and production deployments.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:78%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>78%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>78%</span></div>
     </div>
     <div class="skill-card">
       <div class="skill-icon">🎨</div>
-      <div class="skill-name">UI/UX Design</div>
-      <div class="skill-desc">Translating user needs into clean, intuitive interfaces with Figma, Tailwind, and CSS mastery.</div>
+      <div class="skill-name" data-i18n="skillUi">UI/UX Design</div>
+      <div class="skill-desc" data-i18n="skillUiDesc">Translating user needs into clean, intuitive interfaces with Figma, Tailwind, and CSS mastery.</div>
       <div class="skill-bar"><div class="skill-bar-fill" style="--w:82%"></div></div>
-      <div class="skill-level"><span>Proficiency</span><span>82%</span></div>
+      <div class="skill-level"><span data-i18n="skillProficiency">Proficiency</span><span>82%</span></div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">Work</div>
-  <h2 class="section-title reveal">Featured Projects</h2>
-  <p class="section-subtitle reveal">Selected projects that showcase my skills — from Rwanda platforms to e-commerce and Movie.</p>
+  <div class="section-label" data-i18n="projectsLabel">Work</div>
+  <h2 class="section-title reveal" data-i18n="projectsTitle">Featured Projects</h2>
+  <p class="section-subtitle reveal" data-i18n="projectsSubtitle">Selected projects that showcase my skills — from Rwanda platforms to e-commerce and Movie.</p>
 
   <div class="projects-grid">
     <div class="project-card reveal">
@@ -644,16 +698,16 @@
           <span class="tag purple">CSS</span>
           <span class="tag">JavaScript</span>
         </div>
-        <div class="project-name">Tembera U Rwanda</div>
-        <div class="project-desc">A full-featured SaaS dashboard with real-time analytics, user auth, subscription billing, and a clean admin panel. Served 1,000+ users.</div>
+        <div class="project-name" data-i18n="project1Name">Tembera U Rwanda</div>
+        <div class="project-desc" data-i18n="project1Desc">A full-featured SaaS dashboard with real-time analytics, user auth, subscription billing, and a clean admin panel. Served 1,000+ users.</div>
         <div class="project-links">
           <a href="https://temberaurwanda.vercel.app/" class="project-link primary" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
+            <span data-i18n="liveDemo">Live Demo</span>a-i18n="liveDemo">Live Demo</span>
           </a>
           <a href="https://temberaurwanda.vercel.app/" class="project-link">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            GitHub
+            <span data-i18n="githubLabel">GitHub</span>
           </a>
         </div>
       </div>
@@ -679,16 +733,16 @@
           <span class="tag red">CSS</span>
           <span class="tag purple">JavaScript</span>
         </div>
-        <div class="project-name">Inkamire Animals Business</div>
-        <div class="project-desc">An e-commerce platform with product management, cart, Stripe payments, order tracking, and an admin dashboard. Handles 500+ orders/month.</div>
+        <div class="project-name" data-i18n="project2Name">Inkamire Animals Business</div>
+        <div class="project-desc" data-i18n="project2Desc">An e-commerce platform with product management, cart, Stripe payments, order tracking, and an admin dashboard. Handles 500+ orders/month.</div>
         <div class="project-links">
           <a href="https://inkamire.vercel.app/index.html" class="project-link primary" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
+            <span data-i18n="liveDemo">Live Demo</span>a-i18n="liveDemo">Live Demo</span>
           </a>
           <a href="https://github.com/inkamire" class="project-link" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            GitHub
+            <span data-i18n="githubLabel">GitHub</span>data-i18n="githubLabel">GitHub</span>
           </a>
         </div>
       </div>
@@ -714,16 +768,16 @@
           <span class="tag purple">FastAPI</span>
           <span class="tag">TMDB</span>
         </div>
-        <div class="project-name">Pi Films</div>
-        <div class="project-desc">A high-performance REST API with JWT auth, rate limiting, webhook support, and full OpenAPI documentation. Used by 20+ apps.</div>
+        <div class="project-name" data-i18n="project3Name">Pi Films</div>
+        <div class="project-desc" data-i18n="project3Desc">A high-performance REST API with JWT auth, rate limiting, webhook support, and full OpenAPI documentation. Used by 20+ apps.</div>
         <div class="project-links">
           <a href="https://pi-films.netlify.app/" class="project-link primary" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
+            <span data-i18n="liveDemo">Live Demo</span>a-i18n="liveDemo">Live Demo</span>
           </a>
           <a href="https://github.com/pi-films" class="project-link" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-            GitHub
+            <span data-i18n="githubLabel">GitHub</span>
           </a>
         </div>
       </div>
@@ -733,18 +787,18 @@
 
 <!-- WEBSITES -->
 <section class="websites-section" id="websites">
-  <div class="section-label">Live Sites</div>
-  <h2 class="section-title reveal">Websites I've Built</h2>
-  <p class="section-subtitle reveal">Real sites live on the internet — click to visit.</p>
+  <div class="section-label" data-i18n="websitesLabel">Live Sites</div>
+  <h2 class="section-title reveal" data-i18n="websitesTitle">Websites I've Built</h2>
+  <p class="section-subtitle reveal" data-i18n="websitesSubtitle">Real sites live on the internet — click to visit.</p>
 
   <div class="websites-list reveal">
     <a href="https://inkamire.vercel.app/" target="_blank" rel="noopener" class="website-item">
       <div class="website-num">01</div>
       <div class="website-info">
-        <div class="website-name">Inkamire Animals Business</div>
+        <div class="website-name" data-i18n="site1Name">Inkamire Animals Business</div>
         <div class="website-url">https://inkamire.vercel.app/</div>
       </div>
-      <div class="website-desc">Animal business website with online store and booking system</div>
+      <div class="website-desc" data-i18n="site1Desc">Animal business website with online store and booking system</div>
       <div class="website-stack">
         <span class="tag">HTML</span>
         <span class="tag purple">CSS</span>
@@ -761,10 +815,10 @@
     <a href="https://temberaurwanda.vercel.app/" target="_blank" rel="noopener" class="website-item">
       <div class="website-num">02</div>
       <div class="website-info">
-        <div class="website-name">Tembera Rwanda</div>
+        <div class="website-name" data-i18n="site2Name">Tembera Rwanda</div>
         <div class="website-url">https://temberaurwanda.vercel.app/</div>
       </div>
-      <div class="website-desc">Rwanda description website and culture hertage</div>
+      <div class="website-desc" data-i18n="site2Desc">Rwanda description website and culture heritage</div>
       <div class="website-stack">
         <span class="tag">Vue.js</span>
         <span class="tag">Tailwind</span>
@@ -781,10 +835,10 @@
     <a href="https://pi-films.netlify.app/" target="_blank" rel="noopener" class="website-item">
       <div class="website-num">03</div>
       <div class="website-info">
-        <div class="website-name">Pi Films</div>
+        <div class="website-name" data-i18n="site3Name">Pi Films</div>
         <div class="website-url">pi-films.netlify.app/</div>
       </div>
-      <div class="website-desc">Movie website with trailers and reviews</div>
+      <div class="website-desc" data-i18n="site3Desc">Movie website with trailers and reviews</div>
       <div class="website-stack">
         <span class="tag">Vue.js</span>
         <span class="tag red">Netlify</span>
@@ -803,25 +857,25 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
-    <div class="section-label" style="justify-content:center">Contact</div>
-    <h2 class="section-title reveal" style="text-align:center">Let's Build Something<br>Together</h2>
-    <p class="section-subtitle reveal" style="margin: 16px auto 0; text-align:center">
+    <div class="section-label" style="justify-content:center" data-i18n="contactLabel">Contact</div>
+    <h2 class="section-title reveal" style="text-align:center" data-i18n="contactTitle">Let's Build Something<br>Together</h2>
+    <p class="section-subtitle reveal" style="margin: 16px auto 0; text-align:center" data-i18n="contactSubtitle">
       Have a project in mind? Looking for a developer to join your team? I'm always open to new opportunities and interesting collaborations.
     </p>
     <a href="mailto:kevinineza4@gmail.com" class="contact-email reveal">kevinineza4@gmail.com</a>
     <div class="social-links reveal">
       <a href="https://github.com/kevinineza4-png" target="_blank" class="social-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-        GitHub
+        <span data-i18n="socialGitHub">GitHub</span>
       </a>
       <a href="https://linkedin.com/in/kevinineza4" target="_blank" class="social-link">
         <svg width="16" height="16" viewBox="0
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-        Twitter
+        <span data-i18n="socialTwitter">Twitter</span>
       </a>
       <a href="/resume.pdf" class="social-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
-        Resume / CV
+        <span data-i18n="socialResume">Resume / CV</span>
       </a>
     </div>
   </div>
@@ -830,10 +884,213 @@
 <!-- FOOTER -->
 <footer>
   <div>© 2026 Ineza Kevin. All rights reserved.</div>
-  <div style="color:var(--accent); font-size:0.7rem">Built with precision & passion</div>
+  <div style="color:var(--accent); font-size:0.7rem" data-i18n="footerTag">Built with precision & passion</div>
 </footer>
 
 <script>
+  const translations = {
+    en: {
+      navSkills: 'Skills',
+      navProjects: 'Projects',
+      navWebsites: 'Websites',
+      navContact: 'Contact',
+      hireMe: 'Hire Me',
+      langLabel: 'Language',
+      heroBadge: 'Available for Work',
+      heroSubtitle: 'I build fast, beautiful, and scalable web applications — from pixel-perfect frontends to robust backend systems. Turning ideas into real digital products.',
+      heroViewWork: 'View My Work',
+      heroTalk: 'Let\'s Talk',
+      yearsExp: 'Years Experience',
+      projectsDelivered: 'Projects Delivered',
+      skillsLabel: 'Expertise',
+      skillsTitle: 'What I Work With',
+      skillsSubtitle: 'A versatile stack built for modern web development — from idea to deployment.',
+      skillProficiency: 'Proficiency',
+      skillVue: 'Vue.js',
+      skillVueDesc: 'Building dynamic UIs and server-rendered apps with modern React patterns, hooks, and the App Router.',
+      skillJs: 'JavaScript / TypeScript',
+      skillJsDesc: 'Deep expertise in modern JS/TS — async patterns, type systems, performance, and clean architecture.',
+      skillPy: 'Python',
+      skillPyDesc: 'Backend APIs, data processing, and automation using Python with Django and FastAPI frameworks.',
+      skillDb: 'Database Design',
+      skillDbDesc: 'PostgreSQL, MySQL, MongoDB — schema design, query optimization, and scalable data modeling.',
+      skillCloud: 'Cloud & DevOps',
+      skillCloudDesc: 'AWS, Vercel, Docker — CI/CD pipelines, containerization, and production deployments.',
+      skillUi: 'UI/UX Design',
+      skillUiDesc: 'Translating user needs into clean, intuitive interfaces with Figma, Tailwind, and CSS mastery.',
+      projectsLabel: 'Work',
+      projectsTitle: 'Featured Projects',
+      projectsSubtitle: 'Selected projects that showcase my skills — from Rwanda platforms to e-commerce and Movie.',
+      project1Name: 'Tembera U Rwanda',
+      project1Desc: 'A full-featured SaaS dashboard with real-time analytics, user auth, subscription billing, and a clean admin panel. Served 1,000+ users.',
+      project2Name: 'Inkamire Animals Business',
+      project2Desc: 'An e-commerce platform with product management, cart, Stripe payments, order tracking, and an admin dashboard. Handles 500+ orders/month.',
+      project3Name: 'Pi Films',
+      project3Desc: 'A high-performance REST API with JWT auth, rate limiting, webhook support, and full OpenAPI documentation. Used by 20+ apps.',
+      liveDemo: 'Live Demo',
+      githubLabel: 'GitHub',
+      websitesLabel: 'Live Sites',
+      websitesTitle: 'Websites I\'ve Built',
+      websitesSubtitle: 'Real sites live on the internet — click to visit.',
+      site1Name: 'Inkamire Animals Business',
+      site1Desc: 'Animal business website with online store and booking system',
+      site2Name: 'Tembera Rwanda',
+      site2Desc: 'Rwanda description website and culture heritage',
+      site3Name: 'Pi Films',
+      site3Desc: 'Movie website with trailers and reviews',
+      contactLabel: 'Contact',
+      contactTitle: 'Let\'s Build Something\nTogether',
+      contactSubtitle: 'Have a project in mind? Looking for a developer to join your team? I\'m always open to new opportunities and interesting collaborations.',
+      socialGitHub: 'GitHub',
+      socialTwitter: 'Twitter',
+      socialResume: 'Resume / CV',
+      footerTag: 'Built with precision & passion'
+    },
+    fr: {
+      navSkills: 'Compétences',
+      navProjects: 'Projets',
+      navWebsites: 'Sites',
+      navContact: 'Contact',
+      hireMe: 'Engagez-moi',
+      langLabel: 'Langue',
+      heroBadge: 'Disponible pour le travail',
+      heroSubtitle: 'Je conçois des applications web rapides, élégantes et évolutives — du frontend pixel-perfect aux systèmes backend robustes.',
+      heroViewWork: 'Voir mes travaux',
+      heroTalk: 'Parlons',
+      yearsExp: 'Années d\'expérience',
+      projectsDelivered: 'Projets livrés',
+      skillsLabel: 'Compétences',
+      skillsTitle: 'Ce que je fais',
+      skillsSubtitle: 'Une pile polyvalente conçue pour le développement web moderne — de l’idée au déploiement.',
+      skillProficiency: 'Niveau',
+      skillVue: 'Vue.js',
+      skillVueDesc: 'Création d\'interfaces dynamiques et d\'applications rendues côté serveur avec les patterns modernes de React.',
+      skillJs: 'JavaScript / TypeScript',
+      skillJsDesc: 'Expertise avancée en JS/TS — patterns asynchrones, typage, performance et architecture propre.',
+      skillPy: 'Python',
+      skillPyDesc: 'API backend, traitement de données et automatisation avec Django et FastAPI.',
+      skillDb: 'Conception de bases de données',
+      skillDbDesc: 'PostgreSQL, MySQL, MongoDB — modélisation, optimisation des requêtes et architecture des données.',
+      skillCloud: 'Cloud & DevOps',
+      skillCloudDesc: 'AWS, Vercel, Docker — pipelines CI/CD, conteneurisation et déploiements en production.',
+      skillUi: 'Design UI/UX',
+      skillUiDesc: 'Transformer les besoins utilisateurs en interfaces propres et intuitives avec Figma, Tailwind et CSS.',
+      projectsLabel: 'Travaux',
+      projectsTitle: 'Projets en vedette',
+      projectsSubtitle: 'Des projets sélectionnés qui montrent mes compétences — des plateformes rwandaises au e-commerce et au cinéma.',
+      project1Name: 'Tembera U Rwanda',
+      project1Desc: 'Tableau de bord SaaS complet avec analytics en temps réel, authentification, facturation et panneau d\'administration.',
+      project2Name: 'Inkamire Animals Business',
+      project2Desc: 'Plateforme e-commerce avec gestion des produits, panier, paiements Stripe, suivi des commandes et tableau de bord admin.',
+      project3Name: 'Pi Films',
+      project3Desc: 'API REST performante avec auth JWT, limitation, webhooks et documentation OpenAPI complète.',
+      liveDemo: 'Démo en ligne',
+      githubLabel: 'GitHub',
+      websitesLabel: 'Sites en ligne',
+      websitesTitle: 'Sites que j\'ai créés',
+      websitesSubtitle: 'Des sites réels en ligne — cliquez pour visiter.',
+      site1Name: 'Inkamire Animals Business',
+      site1Desc: 'Site d\'entreprise animale avec boutique en ligne et système de réservation',
+      site2Name: 'Tembera Rwanda',
+      site2Desc: 'Site de présentation du Rwanda et du patrimoine culturel',
+      site3Name: 'Pi Films',
+      site3Desc: 'Site de films avec bande-annonces et critiques',
+      contactLabel: 'Contact',
+      contactTitle: 'Construisons quelque chose\nensemble',
+      contactSubtitle: 'Vous avez un projet en tête ? Vous cherchez un développeur pour rejoindre votre équipe ? Je suis toujours ouvert aux nouvelles opportunités.',
+      socialGitHub: 'GitHub',
+      socialTwitter: 'X / Twitter',
+      socialResume: 'CV / résumé',
+      footerTag: 'Conçu avec précision & passion'
+    },
+    rw: {
+      navSkills: 'Ubumenyi',
+      navProjects: 'Ibikorwa',
+      navWebsites: 'Imbuga',
+      navContact: 'Twandikire',
+      hireMe: 'Nshyire mu kazi',
+      langLabel: 'Ururimi',
+      heroBadge: 'Nshobora gukora',
+      heroSubtitle: 'Nubaka porogaramu za web zihuta, nziza kandi zishoboka — kuva ku frontend y’umwimerere kugeza ku backend ikomeye.',
+      heroViewWork: 'Reba imirimo yanjye',
+      heroTalk: 'Tuvugane',
+      yearsExp: 'Imyaka y\'ubuhanga',
+      projectsDelivered: 'Imirimo yatanzwe',
+      skillsLabel: 'Ubumenyi',
+      skillsTitle: 'Nkorera iki',
+      skillsSubtitle: 'Umutekano w\'ibikoresho byo gukoresha kuri web y\'iki gihe — uhereye ku gitekerezo kugeza ku isohoka.',
+      skillProficiency: 'Urwego',
+      skillVue: 'Vue.js',
+      skillVueDesc: 'Gukora UIs zihinduka hamwe na porogaramu zikoreshwa ku seriveri zifite imiterere ya React.',
+      skillJs: 'JavaScript / TypeScript',
+      skillJsDesc: 'Ubumenyi bwimbitse muri JS/TS — uburyo bwo gukora ku gihe, ubwoko, imikorere n\'ubwubatsi buhuje.',
+      skillPy: 'Python',
+      skillPyDesc: 'API za backend, gutunganya amakuru no gukora ibikora bitari byoroshye na Django na FastAPI.',
+      skillDb: 'Gushushanya ububikoshingiro',
+      skillDbDesc: 'PostgreSQL, MySQL, MongoDB — igishushanyo, guhuza ibibazo, n\'ubwubatsi bw\'amakuru.',
+      skillCloud: 'Cloud & DevOps',
+      skillCloudDesc: 'AWS, Vercel, Docker — CI/CD, containerization n\'ubwubatsi bwo gushyira mu bikorwa.',
+      skillUi: 'UI/UX Design',
+      skillUiDesc: 'Guhindura ibyifuzo by\'abakoze mu interfaces nziza kandi zoroheje ukoresheje Figma, Tailwind na CSS.',
+      projectsLabel: 'Imirimo',
+      projectsTitle: 'Ibikorwa by\'ingenzi',
+      projectsSubtitle: 'Ibikorwa byatoranijwe bigaragaza ubumenyi bwanjye — uhereye ku mbuga ya Rwanda kugeza ku e-commerce n\'ibifilime.',
+      project1Name: 'Tembera U Rwanda',
+      project1Desc: 'Umutangazamakuru wa SaaS uzuye hamwe n\'amatsinda y\'ibisubizo, kwemeza, kubara no kuyobora.',
+      project2Name: 'Inkamire Animals Business',
+      project2Desc: 'Urubuga rw\'ubucuruzi hamwe n\'ubuyobozi bw\'ibicuruzwa, igare, ubwishyu bwa Stripe, gukurikirana ibicuruzwa n\'ubuyobozi.',
+      project3Name: 'Pi Films',
+      project3Desc: 'API ya REST ihuta hamwe na JWT auth, rate limiting, webhooks n\'amasezerano ya OpenAPI.',
+      liveDemo: 'Igaragaza',
+      githubLabel: 'GitHub',
+      websitesLabel: 'Imbuga iri ku rubuga',
+      websitesTitle: 'Imbuga nakoze',
+      websitesSubtitle: 'Imbuga nyayo iri ku rubuga — kanda uze kureba.',
+      site1Name: 'Inkamire Animals Business',
+      site1Desc: 'Urubuga rw\'ubucuruzi bw\'amatungo hamwe n\'igicuruzwa online n\'uburyo bwo guteganya',
+      site2Name: 'Tembera Rwanda',
+      site2Desc: 'Urubuga rw\'ibanze rwa Rwanda n\'umuziki w\'umuco',
+      site3Name: 'Pi Films',
+      site3Desc: 'Urubuga rw\'ibifilime hamwe na trailers n\'isubiramo',
+      contactLabel: 'Twandikire',
+      contactTitle: 'Turebe uko twubaka\nhamwe',
+      contactSubtitle: 'Ufite umushinga mu mutwe? Usearcha umusore wo kujya mu itsinda ryawe? Nta kibazo cy\'amahirwe nshya ndafunguye.',
+      socialGitHub: 'GitHub',
+      socialTwitter: 'Twitter',
+      socialResume: 'CV / Resume',
+      footerTag: 'Byakozwe neza & urukundo'
+    }
+  };
+
+  const langSelect = document.getElementById('langSelect');
+  const themeToggle = document.getElementById('themeToggle');
+
+  function applyLanguage(lang) {
+    const map = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      if (map[el.dataset.i18n]) el.textContent = map[el.dataset.i18n];
+    });
+    localStorage.setItem('lang', lang);
+  }
+
+  function applyTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', theme);
+  }
+
+  const savedLang = localStorage.getItem('lang') || 'en';
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  langSelect.value = savedLang;
+  applyLanguage(savedLang);
+  applyTheme(savedTheme);
+
+  langSelect.addEventListener('change', (e) => applyLanguage(e.target.value));
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+  });
 
   // SCROLL REVEAL
   const reveals = document.querySelectorAll('.reveal');
